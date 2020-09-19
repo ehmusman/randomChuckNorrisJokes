@@ -1,2 +1,2 @@
 visit following URL
-randomchucknorrisjokes-ehmusman.surge.sh
+http://randomchucknorrisjokes-ehmusman.surge.sh
