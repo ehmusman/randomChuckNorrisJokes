@@ -9,26 +9,33 @@ function getJokes(e) {
 
     const xhr = new XMLHttpRequest();
 
-    console.log(number);
+    // console.log(number);
     xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
     if (number !== '') {
-        xhr.onload = function() {
-            if (this.status === 200) {
-                const response = JSON.parse(this.responseText);
+        if (Math.sign(number) === -1) {
+            let output = '';
+            output += '<li> Enter a Positive number </li>'
+            document.querySelector('.jokes').innerHTML = output;
+        } else {
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    const response = JSON.parse(this.responseText);
 
-                let output = '';
+                    let output = '';
 
-                if (response.type === 'success') {
-                    response.value.forEach(function(joke) {
-                        output += `<li> ${joke.joke}</li>`
-                    })
-                } else {
-                    output += '<li> Somethig went wrong </li>'
+                    if (response.type === 'success') {
+                        response.value.forEach(function(joke) {
+                            output += `<li> ${joke.joke}</li>`
+                        })
+                    } else {
+                        output += '<li> Somethig went wrong </li>'
+                    }
+                    // console.log(response);
+
+                    document.querySelector('.jokes').innerHTML = output;
                 }
-                // console.log(response);
-
-                document.querySelector('.jokes').innerHTML = output;
             }
+
         }
 
 
